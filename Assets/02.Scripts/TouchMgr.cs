@@ -20,8 +20,20 @@ public class TouchMgr : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0)
             && Physics.Raycast(ray, out hit, 100.0f, 1<<8))
-            {
-                Destroy(hit.collider.gameObject);
-            }        
+        {
+            Destroy(hit.collider.gameObject);
+            Explosion(hit.point);
+        }        
     }
+    
+    //폭발효과 발생
+    void Explosion(Vector3 point)
+    {
+        Collider[] colls = Physics.OverlapSphere(point, 10.0f, 1<<9);
+        foreach(var coll in colls)
+        {
+            
+        }
+    }
+
 }

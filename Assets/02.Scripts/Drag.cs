@@ -21,6 +21,11 @@ public class Drag : MonoBehaviour
     public void OnDrag(PointerEventData eventData)
     {
         tr.position = Input.mousePosition;
+        
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
+        {
+            tr.position = Input.GetTouch(0).position;
+        }
     }
 
     public void OnBeginDrag(PointerEventData data)

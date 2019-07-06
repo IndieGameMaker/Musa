@@ -6,6 +6,9 @@ public class Drop : MonoBehaviour
 {
     public void OnDrop(PointerEventData data)
     {
-        Drag.draggedItem.transform.SetParent(this.transform);
+        if (transform.childCount == 0)
+        {
+            Drag.draggedItem.transform.SetParent(this.transform);
+        }
     }
 }

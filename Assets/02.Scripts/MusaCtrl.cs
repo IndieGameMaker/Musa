@@ -31,6 +31,12 @@ public class MusaCtrl : MonoBehaviour
 #endif
 
 #if UNITY_ANDROID
+        //안드로이드 디바이스의 백(Back) 버튼
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();  //앱 종료
+        }
+
         //첫 번째 손가락으로 터치한 경우
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {

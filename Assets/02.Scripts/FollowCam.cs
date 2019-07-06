@@ -16,9 +16,12 @@ public class FollowCam : MonoBehaviour
 
     void LateUpdate()
     {
-        Vector3 movePoint = target.position - tr.position;
-        Vector3 move = Vector3.Lerp(tr.position, movePoint, Time.deltaTime * damping);
+        Vector3 pos = target.position                 //주인공 위치
+                        + (Vector3.right * distance)  //카메라의 위치를 X축 이동
+                        + (Vector3.up * height);      //카메라의 위치를 Y축 이동
 
-        tr.position = move + Vector3.right * distance + Vector3.up * height;        
+        tr.position = Vector3.Lerp(tr.position, pos, Time.deltaTime * damping);
+        //카메라를 주인공을 향해서 바라보도록 회전(Look At)
+        tr.LookAt(target.position);
     }
 }

@@ -32,17 +32,18 @@ public class EnemyCtrl : MonoBehaviour
     void Update()
     {
         float dist = Vector3.Distance(tr.position, playerTr.position);
-        
+
         if (dist <= attackDist)     //공격사정거리 이내의 경우
         {
             nv.isStopped = true;
-            anim.SetTrigger("Attack");
+            anim.SetBool("IsAttack", true);
             anim.SetBool("IsTrace", false);
         }
         else if (dist <= traceDist) //추적사정거리 이내의 경우
         {
             nv.SetDestination(playerTr.position);
             nv.isStopped = false;
+            anim.SetBool("IsAttack", false);
             anim.SetBool("IsTrace", true);
         }
         //순찰 모드

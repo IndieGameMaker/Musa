@@ -39,13 +39,17 @@ public class MusaCtrl : MonoBehaviour
             movePoint = hit.point;
         }
 
-        //이동해야할 지점까지의 벡터를 계산
-        Vector3 dir = movePoint - tr.position;
-        //벡터의 각도(쿼터니언 타입으로 산출)
-        Quaternion rot = Quaternion.LookRotation(dir);
-        //주인공 캐릭터의 점진적으로 회전
-        tr.rotation = Quaternion.Slerp(tr.rotation, rot, Time.deltaTime * damping);
-        //주인공 캐릭터의 전진
-        tr.Translate(Vector3.forward * Time.deltaTime * speed);        
+        //(현재위치 - 목적지) => 길이 
+        if ((tr.position - movePoint).sqrMagnitude >= 0.2f * 0.2f)
+        {
+            //이동해야할 지점까지의 벡터를 계산
+            Vector3 dir = movePoint - tr.position;
+            //벡터의 각도(쿼터니언 타입으로 산출)
+            Quaternion rot = Quaternion.LookRotation(dir);
+            //주인공 캐릭터의 점진적으로 회전
+            tr.rotation = Quaternion.Slerp(tr.rotation, rot, Time.deltaTime * damping);
+            //주인공 캐릭터의 전진
+            tr.Translate(Vector3.forward * Time.deltaTime * speed);        
+        }
     }
 }

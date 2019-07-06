@@ -31,7 +31,7 @@ public class MusaCtrl : MonoBehaviour
         }
 #endif
         //바닥만 검출하는 레이캐스트를 캐스팅
-        if (Physics.Raycast(ray, out hit, 20.0F, 1<<10))
+        if (Input.GetMouseButtonDown(0) && Physics.Raycast(ray, out hit, 20.0F, 1<<10))
         {
             //이동해야할 지점까지의 벡터를 계산
             Vector3 dir = hit.point - tr.position;
@@ -39,6 +39,8 @@ public class MusaCtrl : MonoBehaviour
             Quaternion rot = Quaternion.LookRotation(dir);
             //주인공 캐릭터의 점진적으로 회전
             tr.rotation = Quaternion.Slerp(tr.rotation, rot, Time.deltaTime * damping);
+            //주인공 캐릭터의 전진
+            tr.Translate(Vector3.forward * Time.deltaTime * speed);
         }
     }
 }

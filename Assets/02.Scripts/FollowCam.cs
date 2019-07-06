@@ -22,6 +22,6 @@ public class FollowCam : MonoBehaviour
 
         tr.position = Vector3.Lerp(tr.position, pos, Time.deltaTime * damping);
         //카메라를 주인공을 향해서 바라보도록 회전(Look At)
-        tr.LookAt(target.position);
+        //tr.LookAt(target.position);
     }
 }

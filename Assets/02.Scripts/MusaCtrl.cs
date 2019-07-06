@@ -13,10 +13,14 @@ public class MusaCtrl : MonoBehaviour
 
     //이동할 좌표를 저장 변수
     private Vector3 movePoint = Vector3.zero;
+    private Animator anim;
+    //해쉬값 미리 추출
+    private int hashIsRun = Animator.StringToHash("IsRun");
 
     void Start()
     {
         tr = GetComponent<Transform>();
+        anim = GetComponent<Animator>();
     }
 
     void Update()

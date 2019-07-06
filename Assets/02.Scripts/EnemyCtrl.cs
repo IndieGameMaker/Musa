@@ -31,29 +31,27 @@ public class EnemyCtrl : MonoBehaviour
 
     void Update()
     {
-        if (nv.velocity.sqrMagnitude >= 0.2f * 0.2f //속도가 0.2 클때 --> 이동 중 일때
+        float dist = Vector3.Distance(tr.position, playerTr.position);
+        
+        if (dist <= attackDist)     //공격사정거리 이내의 경우
+        {
+            nv.isStopped = true;
+            anim.SetTrigger("Attack");
+            anim.SetBool("IsTrace", false);
+        }
+        else if (dist <= traceDist) //추적사정거리 이내의 경우
+        {
+            nv.SetDestination(playerTr.position);
+            nv.isStopped = false;
+            anim.SetBool("IsTrace", true);
+        }
+        //순찰 모드
+        else if (nv.velocity.sqrMagnitude >= 0.2f * 0.2f //속도가 0.2 클때 --> 이동 중 일때
            && nv.remainingDistance <= 0.2f)         //목적지까지 남은 거리가 0.2(20cm) 이하일 경우
         {
-            float dist = Vector3.Distance(tr.position, playerTr.position);
-
-            if (dist <= attackDist)     //공격사정거리 이내의 경우
-            {
-                nv.isStopped = true;
-                anim.SetTrigger("Attack");
-                anim.SetBool("IsTrace", false);
-            }
-            else if (dist <= traceDist) //추적사정거리 이내의 경우
-            {
-                nv.SetDestination(playerTr.position);
-                nv.isStopped = false;
-                anim.SetBool("IsTrace", true);
-            }
-            else //순찰 모드
-            {
-                nextIdx = (++nextIdx >= points.Length) ? 1 : nextIdx;
-                nv.SetDestination(points[nextIdx].position);
-                nv.isStopped = false;
-            }
+            nextIdx = (++nextIdx >= points.Length) ? 1 : nextIdx;
+            nv.SetDestination(points[nextIdx].position);
+            nv.isStopped = false;
         }
     }
 }

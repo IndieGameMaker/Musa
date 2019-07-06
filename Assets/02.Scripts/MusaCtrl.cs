@@ -38,7 +38,7 @@ public class MusaCtrl : MonoBehaviour
             //벡터의 각도(쿼터니언 타입으로 산출)
             Quaternion rot = Quaternion.LookRotation(dir);
             //주인공 캐릭터의 점진적으로 회전
-            tr.rotation = Quaternion.Slerp(tr.rotation, rot, Time.deltaTime * damping);
+            tr.rotation = Quaternion.Slerp(tr.rotation, rot, Time.deltaTime * damping);
         }
     }
 }
